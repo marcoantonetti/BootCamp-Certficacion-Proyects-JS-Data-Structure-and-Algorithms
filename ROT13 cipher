@@ -1,0 +1,57 @@
+/*
+Caesars Cipher
+One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher.
+In a shift cipher the meanings of the letters are shifted by some set amount.
+
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus A ↔ N, B ↔ O and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+*/
+
+function rot13(str) {
+
+  let arr = str.split('')
+
+  let uncrypted = arr.map((char, index ,arr) => {
+
+    // If char is in the alphabet
+    if(/[A-Za-z]/.test(char)){
+
+      // Get charCode
+      let charCode = str.charCodeAt(index).toString()
+
+      // Replace char with charCodeShifted 
+      return  char = charCodesShifted(charCode) 
+
+  } else {
+    // If char not in the alphabet, do nothing
+    return char = char
+  }
+  
+  })
+
+  return uncrypted.join('')         
+}
+
+// Returns a char shifted 13 places to the right in the alphabet
+let charCodesShifted = (num) =>{
+
+// Keys are charCodes shifted 13 places to the right
+ let dicc = { 
+"78": "A",    
+"79": "B",     "80": "C",     "81": "D",     "82": "E",     "83": "F",    
+"84": "G",     "85": "H",     "86": "I",     "87": "J",     "88": "K",    
+"89": "L",     "90": "M",     "65": "N",     "66": "O",     "67": "P",    
+"68": "Q",     "69": "R",     "70": "S",     "71": "T",     "72": "U",    
+"73": "V",     "74": "W",     "75": "X",     "76": "Y",     "77": "Z",
+}
+
+return dicc[num]
+
+}
+
+let string = "SERR PBQR PNZC"
+
+console.log(rot13(string));
