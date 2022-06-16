@@ -1,0 +1,104 @@
+/*
+Telephone Number Validator
+Return true if the passed string looks like a valid US phone number.
+
+The user may fill out the form field any way they choose as long as it has the format of a valid US number. 
+The following are examples of valid formats for US numbers (refer to the tests below for other variants):
+
+555-555-5555
+(555)555-5555
+(555) 555-5555
+555 555 5555
+5555555555
+1 555 555 5555
+
+For this challenge you will be presented with a string such as 800-692-7753 or 8oo-six427676;laskdjf.
+Your job is to validate or reject the US phone number based on any combination of the formats provided above. 
+The area code is required. If the country code is provided, you must confirm that the country code is 1.
+Return true if the string is a valid US phone number; otherwise return false.
+*/
+
+// Main function
+function telephoneCheck(number) {
+
+
+
+  if(hasUSCountryCode(number)){
+
+          if(intAndLength(number)){
+
+                return true
+  
+  }
+
+  }
+
+  return false;
+}
+
+// Auxilary functions
+function hasUSCountryCode(phoneNumber)  {
+/^(\+\d)/
+
+      if( /^(\+1)/.test(phoneNumber) || /^\d/.test(phoneNumber) || /^\(/.test(phoneNumber)) {
+
+        return true
+
+      } else if (/^(\+\d)+/.test(phoneNumber)){
+
+        console.log('Only US phone numbers')
+
+        return false
+
+      }
+      return false
+}
+telephoneCheck("604756961");
+
+// Checks if the phone number is only made of numbers and valid phone number symbols and if it has the valid length
+function intAndLength(number) {
+
+      // If there is parenthesis, 
+      if(/\(/g.test(number) || /\)/g.test(number) ){
+
+        //they should be matching parenthesis
+        if(!/(\(\w+\))/g.test(number)){
+
+        return false
+
+     }
+      }
+
+
+      // Erases valid phone numbers symbols
+      number = number
+                     .replace( /(\+)/g , '' )
+                     .replace(/[\-]/g , '')
+                     .replace(/\s/g , '')
+                     .replace(/\(/g , '')
+                     .replace(/\)/g , '')
+
+
+      // Checks if there are (invalid) symbols in the phone number. Since valid symbols are already erase.
+      if (/([A-Za-z]|\W)/g.test(number)){
+        
+        return false
+
+      } 
+
+
+      // If all remains true, check if its length matches US numbers length
+      return correctLength(number)
+}
+
+function correctLength(number){
+
+ // Without the country code 1, the length for us numbers should be 10
+  if(/^1/.test(number)){
+    number = number
+                    .split('')
+                    .splice(1)
+  }
+        
+  return number.length == 10
+}
