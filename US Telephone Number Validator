@@ -18,10 +18,9 @@ The area code is required. If the country code is provided, you must confirm tha
 Return true if the string is a valid US phone number; otherwise return false.
 */
 
+
 // Main function
 function telephoneCheck(number) {
-
-
 
   if(hasUSCountryCode(number)){
 
@@ -36,33 +35,34 @@ function telephoneCheck(number) {
   return false;
 }
 
+telephoneCheck("604756961");
+
 // Auxilary functions
 function hasUSCountryCode(phoneNumber)  {
-/^(\+\d)/
 
-      if( /^(\+1)/.test(phoneNumber) || /^\d/.test(phoneNumber) || /^\(/.test(phoneNumber)) {
+      if( /^(\+1) /.test(phoneNumber) || /^\d/.test(phoneNumber) || /^\(/.test(phoneNumber)) {
 
         return true
 
-      } else if (/^(\+\d)+/.test(phoneNumber)){
+      } else if (/^(\+\d)/.test(phoneNumber)){
 
         console.log('Only US phone numbers')
 
         return false
 
       }
+
       return false
 }
-telephoneCheck("604756961");
 
 // Checks if the phone number is only made of numbers and valid phone number symbols and if it has the valid length
 function intAndLength(number) {
 
-      // If there is parenthesis, 
+      // If there are parenthesis, 
       if(/\(/g.test(number) || /\)/g.test(number) ){
 
-        //they should be matching parenthesis
-        if(!/(\(\w+\))/g.test(number)){
+        //they should be only in (xxx)\d+ style 
+        if(!/\([0-9]{3}\)/g.test(number)){
 
         return false
 
