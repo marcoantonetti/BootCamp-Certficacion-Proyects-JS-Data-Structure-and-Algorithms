@@ -1,0 +1,95 @@
+function checkCashRegister(price, cash, cid) {
+
+  let cashier = changeKeys(cid)
+  let changeToGive = cash - price
+  let change = 0
+  let check = []
+
+  if (changeInCashier(cashier) == changeToGive){
+
+    return {status: "CLOSED", change: changeKeys(cashier) }
+    
+  }
+
+
+    for (let i = cashier.length - 1; i >= 0; i--){
+
+          if ( cashier[i][0] > changeToGive){
+
+              continue
+
+          }
+
+          while (change <= changeToGive && cashier[i][1] > 0){
+
+          console.log(change, '<=' , changeToGive, cashier[i])
+
+          if (change + cashier[i][0] <= changeToGive ) {
+
+              change += takeBill(cashier[i])
+              check.push()
+              
+              console.log('CHANGE', change)
+
+          } else { break }
+          
+          }
+
+    } 
+
+
+  if (change < changeToGive){
+
+    return {status: "INSUFFICIENT_FUNDS", change: []}
+
+  } 
+
+  return {status: "OPEN", change: changeKeys(cashier)};
+}
+
+console.log(checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+
+
+function changeKeys(arr){
+
+  let newKeys = [0.01, 0.05, 0.10, 0.25, 1, 5 , 10 , 20 , 100]
+  let oldKeys = ["PENNY", "NICKEL", 'DIME', 'QUARTER', 'ONE', 'FIVE', 'TEN', 'TWENTY', 'ONE HUNDRED']
+
+  if (typeof arr[0][0] === 'number'){
+
+  for (let i = 0; i < arr.length; i++){
+
+        arr[i][0] = oldKeys[i]
+
+  }
+  } else  if (typeof arr[0][0] === 'string'){
+
+  for (let i = 0; i < arr.length; i++){
+
+        arr[i][0] = newKeys[i]
+
+  }
+  }
+
+  return arr
+
+}
+
+
+function takeBill (arr) {
+
+      arr[1] =  Math.round(((arr[1] - arr[0]) + Number.EPSILON) * 100) / 100
+
+
+      return arr[0]
+
+}
+
+function changeInCashier(arr){
+
+  let sum = 0
+
+    arr.forEach( (cash) => sum += cash[1])
+
+return sum
+}
