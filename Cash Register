@@ -74,7 +74,7 @@ function makeCheck(arr, bill, check) {
 
 function takeBill (arr, bill) {
 
-      arr[1] =  Math.round(((arr[1] - bill) + Number.EPSILON) * 100) / 100
+      arr[1] =  arr[1] - bill
     
       return bill
 
