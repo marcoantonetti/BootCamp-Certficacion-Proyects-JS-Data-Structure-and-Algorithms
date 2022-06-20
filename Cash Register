@@ -26,7 +26,7 @@ function checkCashRegister(price, cash, cid) {
           if ((change + bills[i]).toFixed(2) <= changeToGive ) {
 // If it isnt, add the bill to the current change
               change += takeBill(cid[i], bills[i])
-// And make the check        
+// And make the check.       
               makeCheck(cid[i], bills[i], check)
               
           } else { break }
