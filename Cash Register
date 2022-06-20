@@ -48,15 +48,14 @@ function checkCashRegister(price, cash, cid) {
 console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
 
 
-function makeCheck(arr, bill, check) {
-
+function makeCheck(cid, bill, check) {
+// Check is an empty array. It pushes the name of the currency unit and its total bill value into the check array. Example: check.push(['Quarter', 0.25]) --> array of arrays
     let bool = true
 
       check.forEach((currency) => {
-
-          if(currency[0] == arr[0]){
-            
-             currency[1] += bill
+// If check already has the given currency unit in it, then just add the bill value to its existing value
+          if(currency[0] == cid[0]){
+             currency[1] += bill  // example [0.25] += 0.25 
              bool = false
 
           } 
@@ -64,7 +63,7 @@ function makeCheck(arr, bill, check) {
 
       if(bool){
 
-        check.push([arr[0], bill])
+        check.push([cid[0], bill])
 
       }
 }
