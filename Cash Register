@@ -1,5 +1,4 @@
-
-    function checkCashRegister(price, cash, cid) {
+function checkCashRegister(price, cash, cid) {
 
   let bills = [0.01,0.05,0.1,0.25,1,5,10,20,100]
   let changeToGive = cash - price
@@ -14,29 +13,29 @@
 
     for (let i = cid.length - 1; i >= 0; i--){
 
+// The bill must be lower than the changeToGive 
           if ( bills[i] > changeToGive){
 
               continue
 
           }
-              
+// Checks cashiers' stock  of that bill and change must be lower than changeToGive
           while (change <= changeToGive && cid[i][1] > 0){
 
+// The current change + another bill can't be higher than the changeToGive
           if ((change + bills[i]).toFixed(2) <= changeToGive ) {
-
+// If it isnt, add the bill to the current change
               change += takeBill(cid[i], bills[i])
-              
+// And make the check        
               makeCheck(cid[i], bills[i], check)
               
-              console.log('CHANGE', change)
-
           } else { break }
           
           }
 
     } 
 
-
+// Lastly, change would only be lower than the ChangeToGive if it didnt have anough funds in the register
   if (change < changeToGive){
 
     return {status: "INSUFFICIENT_FUNDS", change: []}
@@ -71,7 +70,7 @@ function makeCheck(arr, bill, check) {
 }
 
 
-
+// Takes the cashier register and a bill. It returns the bill value and it also substracts that bill value on the cashiers register 
 function takeBill (arr, bill) {
 
       arr[1] =  arr[1] - bill
@@ -80,6 +79,7 @@ function takeBill (arr, bill) {
 
 }
 
+//Returns the sum of the cashier register change
 function changeInCashier(arr){
 
   let sum = 0
